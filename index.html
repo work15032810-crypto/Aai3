@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>वाढदिवसाच्या शुभेच्छा, आई 🌸</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Tiro+Devanagari+Marathi:ital@0;1&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --pink:      #ff85a1;
+      --pink-soft: #ffb3c6;
+      --pink-bg:   #ffe0ea;
+      --lavender:  #c084fc;
+      --lav-bg:    #ede9fe;
+      --mint:      #34d399;
+      --mint-bg:   #d1fae5;
+      --sky:       #38bdf8;
+      --sky-bg:    #e0f2fe;
+      --peach:     #fb923c;
+      --peach-bg:  #ffedd5;
+      --yellow:    #fbbf24;
+      --yellow-bg: #fef9c3;
+      --cream:     #fffbf7;
+      --ink:       #2d1b3d;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'Tiro Devanagari Marathi', serif;
+      overflow-x: hidden;
+    }
+
+    /* ── PETALS ── */
+    #petals-canvas {
+      position: fixed; top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none; z-index: 0;
+    }
+
+    /* ── MUSIC TOGGLE ── */
+    #music-btn {
+      position: fixed; bottom: 2rem; right: 2rem;
+      width: 52px; height: 52px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--pink), var(--lavender));
+      border: none; cursor: pointer; z-index: 1000;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem;
+      box-shadow: 0 4px 20px rgba(192,132,252,.4);
+      transition: transform .3s, box-shadow .3s;
+      animation: musicPulse 2s ease-in-out infinite;
+    }
+    #music-btn:hover { transform: scale(1.1); box-shadow: 0 8px 28px rgba(192,132,252,.5); }
+    @keyframes musicPulse {
+      0%,100% { box-shadow: 0 4px 20px rgba(192,132,252,.4); }
+      50%      { box-shadow: 0 4px 28px rgba(255,133,161,.6); }
+    }
+    #music-btn .music-rings {
+      position: absolute; inset: -6px;
+      border-radius: 50%; border: 2px solid rgba(192,132,252,.3);
+      animation: ringExpand 2s ease-in-out infinite;
+      pointer-events: none;
+    }
+    @keyframes ringExpand {
+      0%   { transform: scale(1); opacity: .6; }
+      100% { transform: scale(1.5); opacity: 0; }
+    }
+
+    /* ── CONFETTI BTN ── */
+    #confetti-btn {
+      display: inline-flex; align-items: center; gap: .5rem;
+      margin-top: 2rem;
+      background: linear-gradient(135deg, var(--yellow), var(--peach));
+      color: white; border: none; cursor: pointer;
+      padding: .9rem 2rem; border-radius: 999px;
+      font-family: 'Tiro Devanagari Marathi', serif;
+      font-size: 1.05rem;
+      box-shadow: 0 4px 20px rgba(251,191,36,.4);
+      transition: transform .2s, box-shadow .2s;
+      opacity: 0; animation: fadeUp .9s 1.2s forwards;
+    }
+    #confetti-btn:hover { transform: scale(1.05); box-shadow: 0 8px 28px rgba(251,191,36,.5); }
+    #confetti-btn:active { transform: scale(.97); }
+
+    /* confetti pieces */
+    .confetti-piece {
+      position: fixed;
+      width: 10px; height: 10px;
+      border-radius: 2px;
+      pointer-events: none;
+      z-index: 9999;
+      animation: confettiFall linear forwards;
+    }
+    @keyframes confettiFall {
+      0%   { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative; min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; padding: 3rem 2rem;
+      background: linear-gradient(135deg, #ffe0ea 0%, #ede9fe 30%, #e0f2fe 60%, #d1fae5 100%);
+      overflow: hidden; z-index: 1;
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 55% 45% at 15% 25%, rgba(255,133,161,.4) 0%, transparent 65%),
+        radial-gradient(ellipse 45% 55% at 85% 70%, rgba(192,132,252,.35) 0%, transparent 65%),
+        radial-gradient(ellipse 40% 40% at 50% 85%, rgba(52,211,153,.3) 0%, transparent 65%),
+        radial-gradient(ellipse 35% 35% at 80% 15%, rgba(56,189,248,.3) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero-eyebrow {
+      font-family: 'Jost', sans-serif;
+      font-size: .85rem; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--pink);
+      background: rgba(255,255,255,.75); padding: .4rem 1.2rem; border-radius: 999px;
+      opacity: 0; animation: fadeUp .8s .2s forwards;
+    }
+    .hero-title {
+      font-size: clamp(2.8rem, 9vw, 6.5rem);
+      font-weight: 400; line-height: 1.2; color: var(--ink);
+      margin: 1rem 0 .5rem;
+      opacity: 0; animation: fadeUp .9s .4s forwards;
+    }
+    .hero-title .aai {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--pink), var(--lavender), var(--sky));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-sub {
+      font-size: clamp(1rem, 2.5vw, 1.4rem); font-style: italic; color: #7c3aed;
+      margin-bottom: 1.5rem;
+      opacity: 0; animation: fadeUp .9s .6s forwards;
+    }
+    .divider {
+      display: flex; align-items: center; gap: .8rem;
+      margin: 0 auto 1.5rem;
+      opacity: 0; animation: fadeUp .9s .75s forwards;
+    }
+    .divider-line { width: 50px; height: 2px; background: linear-gradient(90deg, transparent, var(--pink-soft)); }
+    .divider-line.right { background: linear-gradient(90deg, var(--pink-soft), transparent); }
+    .hero-tagline {
+      max-width: 520px; font-size: 1.05rem; line-height: 2.1; color: #4c1d95;
+      background: rgba(255,255,255,.55); backdrop-filter: blur(6px);
+      border-radius: 16px; padding: 1.4rem 2rem;
+      opacity: 0; animation: fadeUp .9s .9s forwards;
+    }
+    .scroll-hint {
+      position: absolute; bottom: 2rem;
+      display: flex; flex-direction: column; align-items: center; gap: .4rem;
+      opacity: 0; animation: fadeUp .9s 1.5s forwards;
+    }
+    .scroll-hint span {
+      font-family: 'Jost', sans-serif;
+      font-size: .65rem; letter-spacing: .25em; text-transform: uppercase; color: var(--lavender);
+    }
+    .scroll-arrow {
+      width: 2px; height: 36px;
+      background: linear-gradient(to bottom, var(--lavender), transparent);
+      border-radius: 2px; animation: scrollPulse 1.8s ease-in-out infinite;
+    }
+
+    /* ── SECTIONS ── */
+    section { position: relative; z-index: 1; padding: 6rem 2rem; }
+    .section-inner { max-width: 800px; margin: 0 auto; }
+    .section-label {
+      font-family: 'Jost', sans-serif;
+      font-size: .68rem; letter-spacing: .35em; text-transform: uppercase;
+      display: inline-block; padding: .3rem 1rem; border-radius: 999px;
+      margin-bottom: 1.2rem;
+    }
+    .section-title {
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      font-weight: 400; line-height: 1.4; color: var(--ink); margin-bottom: 1.5rem;
+    }
+    .section-body { font-size: 1.05rem; line-height: 2.2; color: #4c1d95; }
+
+    /* ── ABOUT ── */
+    .about { background: linear-gradient(160deg, #fff7fb 0%, #f5f0ff 50%, #f0fdf9 100%); }
+    .about .section-label { background: var(--pink-bg); color: var(--pink); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 3rem; }
+    .about-card {
+      background: white; border-radius: 20px; padding: 2rem;
+      border-top: 4px solid transparent;
+      box-shadow: 0 4px 24px rgba(0,0,0,.06);
+      transition: transform .3s, box-shadow .3s;
+    }
+    .about-card:nth-child(1) { border-top-color: var(--pink); }
+    .about-card:nth-child(2) { border-top-color: var(--lavender); }
+    .about-card:nth-child(3) { border-top-color: var(--mint); }
+    .about-card:nth-child(4) { border-top-color: var(--sky); }
+    .about-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(0,0,0,.1); }
+    .about-card-icon {
+      font-size: 1.8rem; margin-bottom: .8rem; display: block;
+      width: 3rem; height: 3rem; line-height: 3rem; text-align: center; border-radius: 12px;
+    }
+    .about-card:nth-child(1) .about-card-icon { background: var(--pink-bg); }
+    .about-card:nth-child(2) .about-card-icon { background: var(--lav-bg); }
+    .about-card:nth-child(3) .about-card-icon { background: var(--mint-bg); }
+    .about-card:nth-child(4) .about-card-icon { background: var(--sky-bg); }
+    .about-card h3 { font-size: 1.15rem; font-weight: 400; margin-bottom: .6rem; }
+    .about-card:nth-child(1) h3 { color: var(--pink); }
+    .about-card:nth-child(2) h3 { color: var(--lavender); }
+    .about-card:nth-child(3) h3 { color: var(--mint); }
+    .about-card:nth-child(4) h3 { color: var(--sky); }
+    .about-card p { font-size: .95rem; line-height: 2.1; color: #5b4b6b; }
+
+    /* ── BOND ── */
+    .bond { background: linear-gradient(135deg, #fef9c3 0%, #ffedd5 50%, #ffe0ea 100%); }
+    .bond .section-label { background: var(--yellow-bg); color: #92400e; }
+    .bond-quote {
+      font-size: clamp(1.2rem, 3.5vw, 2rem); font-style: italic; line-height: 1.8;
+      color: var(--ink); text-align: center; max-width: 640px; margin: 2.5rem auto;
+      padding: 2rem 3rem; background: rgba(255,255,255,.65); border-radius: 24px;
+      box-shadow: 0 4px 24px rgba(251,191,36,.2); position: relative;
+    }
+    .bond-quote::before, .bond-quote::after {
+      font-family: 'Cormorant Garamond', serif; font-size: 6rem;
+      line-height: 1; position: absolute;
+    }
+    .bond-quote::before { content: '\201C'; top: -.8rem; left: .8rem; color: var(--yellow); }
+    .bond-quote::after  { content: '\201D'; bottom: -2rem; right: .8rem; color: var(--peach); }
+    .bond-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 1.5rem; margin-top: 3rem; }
+    .bond-card { background: white; border-radius: 16px; padding: 1.6rem; box-shadow: 0 4px 20px rgba(0,0,0,.06); }
+    .bond-card:nth-child(1) { border-left: 4px solid var(--peach); }
+    .bond-card:nth-child(2) { border-left: 4px solid var(--yellow); }
+    .bond-card:nth-child(3) { border-left: 4px solid var(--pink); }
+    .bond-card h4 { font-size: 1.1rem; margin-bottom: .5rem; }
+    .bond-card:nth-child(1) h4 { color: var(--peach); }
+    .bond-card:nth-child(2) h4 { color: #d97706; }
+    .bond-card:nth-child(3) h4 { color: var(--pink); }
+    .bond-card p { font-size: .95rem; line-height: 2.1; color: #5b4b6b; }
+
+    /* ══ MEMORIES SLIDESHOW ══ */
+    .memories { background: linear-gradient(160deg, #fdf4ff 0%, #fce7f3 50%, #fff7ed 100%); }
+    .memories .section-label { background: var(--lav-bg); color: #7c3aed; }
+
+    .slideshow-wrap {
+      position: relative; margin-top: 2.5rem;
+      background: white; border-radius: 28px;
+      box-shadow: 0 8px 48px rgba(192,132,252,.15);
+      overflow: hidden;
+    }
+    /* rainbow top */
+    .slideshow-wrap::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px;
+      background: linear-gradient(90deg, var(--pink), var(--lavender), var(--sky), var(--mint), var(--yellow), var(--peach), var(--pink));
+      z-index: 2;
+    }
+
+    .slides-track {
+      display: flex; transition: transform .55s cubic-bezier(.4,0,.2,1);
+    }
+
+    .slide {
+      min-width: 100%; padding: 3.5rem 3rem 3rem;
+      display: flex; flex-direction: column; align-items: center; text-align: center;
+    }
+
+    .slide-emoji {
+      font-size: 3.5rem; margin-bottom: 1rem;
+      animation: none;
+    }
+    .slide-year {
+      font-family: 'Jost', sans-serif;
+      font-size: .75rem; letter-spacing: .3em; text-transform: uppercase;
+      padding: .3rem 1rem; border-radius: 999px;
+      margin-bottom: 1rem; display: inline-block;
+    }
+    .slide:nth-child(1) .slide-year { background: var(--pink-bg); color: var(--pink); }
+    .slide:nth-child(2) .slide-year { background: var(--lav-bg); color: #7c3aed; }
+    .slide:nth-child(3) .slide-year { background: var(--mint-bg); color: #065f46; }
+    .slide:nth-child(4) .slide-year { background: var(--sky-bg); color: #0369a1; }
+    .slide:nth-child(5) .slide-year { background: var(--peach-bg); color: #9a3412; }
+
+    .slide-title {
+      font-size: clamp(1.4rem, 4vw, 2rem); font-weight: 400; color: var(--ink);
+      margin-bottom: .8rem;
+    }
+    .slide-body { font-size: 1rem; line-height: 2.1; color: #5b4b6b; max-width: 480px; }
+
+    /* nav dots */
+    .slide-dots {
+      display: flex; justify-content: center; gap: .5rem;
+      padding: 1.5rem; background: white;
+    }
+    .dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      border: none; cursor: pointer;
+      background: #e5d5f0; transition: background .3s, transform .3s;
+    }
+    .dot.active { background: var(--lavender); transform: scale(1.3); }
+
+    /* arrows */
+    .slide-arrow {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 40px; height: 40px; border-radius: 50%;
+      background: rgba(255,255,255,.9); border: none; cursor: pointer;
+      font-size: 1.1rem; display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 2px 12px rgba(0,0,0,.12); z-index: 3;
+      transition: background .2s, transform .2s;
+    }
+    .slide-arrow:hover { background: white; transform: translateY(-50%) scale(1.1); }
+    .slide-arrow.prev { left: 1rem; }
+    .slide-arrow.next { right: 1rem; }
+
+    /* ── GALLERY ── */
+    .gallery { background: linear-gradient(160deg, #e0f2fe 0%, #ede9fe 50%, #d1fae5 100%); }
+    .gallery .section-label { background: var(--sky-bg); color: #0369a1; }
+    .gallery-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; margin-top: 2.5rem; }
+    .gallery-grid .photo-frame:nth-child(1) { grid-column: span 2; }
+    .gallery-grid .photo-frame:nth-child(4) { grid-column: span 2; }
+    .photo-frame {
+      position: relative; overflow: hidden; aspect-ratio: 4/3; border-radius: 16px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: transform .3s, box-shadow .3s;
+      box-shadow: 0 4px 20px rgba(0,0,0,.1);
+    }
+    .photo-frame:nth-child(1) { background: linear-gradient(135deg, var(--pink-bg), var(--lav-bg)); }
+    .photo-frame:nth-child(2) { background: linear-gradient(135deg, var(--sky-bg), var(--mint-bg)); }
+    .photo-frame:nth-child(3) { background: linear-gradient(135deg, var(--lav-bg), var(--pink-bg)); }
+    .photo-frame:nth-child(4) { background: linear-gradient(135deg, var(--mint-bg), var(--sky-bg)); }
+    .photo-frame:nth-child(5) { background: linear-gradient(135deg, var(--peach-bg), var(--yellow-bg)); }
+    .photo-frame:hover { transform: scale(1.03); box-shadow: 0 16px 40px rgba(0,0,0,.16); }
+    .photo-frame img { width:100%; height:100%; object-fit:cover; position:absolute; inset:0; display:none; border-radius:16px; }
+    .photo-placeholder {
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: .5rem; padding: 1.2rem; text-align: center; width: 100%;
+    }
+    .photo-placeholder-icon { font-size: 2.5rem; }
+    .photo-placeholder p { font-size: 1rem; color: var(--ink); opacity: .75; }
+    .photo-placeholder small { font-family:'Jost',sans-serif; font-size:.68rem; color:#6b7280; opacity:.8; }
+
+    /* ── LETTER ── */
+    .letter { background: linear-gradient(135deg, #fff7fb 0%, #f5f0ff 100%); }
+    .letter .section-label { background: var(--lav-bg); color: #7c3aed; }
+    .letter-paper {
+      background: white; border-radius: 24px; padding: 3.5rem;
+      max-width: 640px; margin: 0 auto;
+      box-shadow: 0 8px 48px rgba(192,132,252,.15);
+      position: relative; overflow: hidden;
+    }
+    .letter-paper::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px;
+      background: linear-gradient(90deg, var(--pink), var(--lavender), var(--sky), var(--mint), var(--yellow), var(--peach), var(--pink));
+    }
+    .letter-paper p { font-size: 1.1rem; line-height: 2.3; color: #3b1f5e; margin-bottom: 1.2rem; }
+    .letter-paper .salutation { font-size: 1.5rem; color: var(--pink); }
+    .letter-paper .sign-off { margin-top: 2rem; font-style: italic; color: var(--lavender); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: linear-gradient(135deg, #2d1b3d, #1e3a5f);
+      color: rgba(255,255,255,.8); text-align: center; padding: 3.5rem 2rem;
+      position: relative; z-index: 1; overflow: hidden;
+    }
+    footer::before {
+      content: ''; position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 50% 60% at 20% 50%, rgba(255,133,161,.12) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 50% at 80% 50%, rgba(192,132,252,.12) 0%, transparent 70%);
+    }
+    footer .footer-title {
+      font-size: 2.2rem; position: relative;
+      background: linear-gradient(135deg, var(--pink-soft), var(--lavender), var(--sky));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; margin-bottom: .5rem;
+    }
+    footer p { font-size: .9rem; opacity: .6; position: relative; }
+    footer .hearts { font-size: 1.6rem; margin: 1rem 0; letter-spacing: .4em; position: relative; }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes scrollPulse { 0%,100%{opacity:.4}50%{opacity:1} }
+    .reveal { opacity: 0; transform: translateY(32px); transition: opacity .8s ease, transform .8s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 600px) {
+      .about-grid { grid-template-columns: 1fr; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; }
+      .gallery-grid .photo-frame:nth-child(1),
+      .gallery-grid .photo-frame:nth-child(4) { grid-column: span 2; }
+      .letter-paper { padding: 2.5rem 1.5rem; }
+      .slide { padding: 2.5rem 1.5rem 2rem; }
+      .bond-quote { padding: 1.5rem 2rem; }
+      .slide-arrow { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="petals-canvas"></canvas>
+
+<!-- MUSIC TOGGLE -->
+<button id="music-btn" title="संगीत चालू/बंद करा">
+  <span class="music-rings"></span>
+  <span id="music-icon">🎵</span>
+</button>
+<audio id="bg-music" loop>
+  <!-- ✅ तुमचं Marathi गाणं इथे जोडा: -->
+  <source src="song.mp3" type="audio/mpeg" />
+</audio>
+
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <p class="hero-eyebrow">🌸 प्रेमाने केलेली एक भेट 🌸</p>
+  <h1 class="hero-title">
+    वाढदिवसाच्या<br>हार्दिक शुभेच्छा,<br>
+    <span class="aai">आई</span>
+  </h1>
+  <p class="hero-sub">तुझ्या नंदिनीकडून, मनापासून 💜</p>
+  <div class="divider">
+    <div class="divider-line"></div>
+    <span>🌸</span>
+    <div class="divider-line right"></div>
+  </div>
+  <p class="hero-tagline">
+    तू प्रत्येक वादळाखाली शांतता आहेस, प्रत्येक साध्या दिवसातली उबदार आठवण आहेस —
+    आणि प्रेम म्हणजे काय हे मला शिकवणारं एकमेव कारण आहेस.
+  </p>
+  <button id="confetti-btn" onclick="launchConfetti()">🎊 आईला शुभेच्छा द्या!</button>
+  <div class="scroll-hint">
+    <span>खाली पहा</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- ══ ABOUT ══ -->
+<section class="about">
+  <div class="section-inner">
+    <span class="section-label reveal">✨ ती कोण आहे</span>
+    <h2 class="section-title reveal">आई — फक्त आई नाही,<br><span style="color:var(--lavender)">एक प्रेरणा आहे</span></h2>
+    <p class="section-body reveal">
+      आई एक सरकारी शाळेत शिक्षिका आहे — रोज वर्गात जाऊन शांतपणे जगाला बदलणारी स्त्री.
+      तिच्या हातात समर्पण आहे, आवाजात उबदारपणा आहे — आणि नंदिनीसाठी मनात नेहमीच एक खास जागा आहे.
+    </p>
+    <div class="about-grid">
+      <div class="about-card reveal">
+        <span class="about-card-icon">📚</span>
+        <h3>शिक्षिका</h3>
+        <p>ती उद्याचे भविष्य घडवते. तिच्या वर्गात बसलेला प्रत्येक विद्यार्थी तिच्या संयमाचा, शहाणपणाचा आणि विश्वासाचा एक तुकडा घेऊन जातो.</p>
+      </div>
+      <div class="about-card reveal">
+        <span class="about-card-icon">🌿</span>
+        <h3>शक्ती</h3>
+        <p>शांत पण अटळ. ती ओरडून नाही सांगत — ती फक्त ठाम उभी राहते, आणि सारं जग तिच्याभोवती जुळवून घेतं.</p>
+      </div>
+      <div class="about-card reveal">
+        <span class="about-card-icon">☀️</span>
+        <h3>आधार</h3>
+        <p>प्रत्येक ऋतूत, प्रत्येक वादात, प्रत्येक उशिरा रात्री — आई नेहमीच होती. जोरात नाही, पण पूर्णपणे.</p>
+      </div>
+      <div class="about-card reveal">
+        <span class="about-card-icon">🌸</span>
+        <h3>हृदय</h3>
+        <p>ती अगदी खऱ्या प्रकारे प्रेम करते — नेहमी शब्दांत नाही, पण गरम जेवणात, छोट्या काळजीत आणि झोपायच्या वेळी जागी राहण्यात.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ BOND ══ -->
+<section class="bond">
+  <div class="section-inner">
+    <span class="section-label reveal">💛 त्यांची गोष्ट</span>
+    <h2 class="section-title reveal"><span style="color:var(--peach)">विरुद्ध स्वभाव,</span><br>एकच प्रेम</h2>
+    <blockquote class="bond-quote reveal">
+      सगळ्या गोष्टींवर मतभेद होतात — पण एकमेकांना पूर्णपणे समजतात.
+    </blockquote>
+    <div class="bond-cards">
+      <div class="bond-card reveal">
+        <h4>🍊 वेगळ्या दुनिया</h4>
+        <p>नंदिनी आणि आईचं क्वचितच एकमत होतं. मतं वेगळी, निवडी वेगळ्या — पण तरीही, वाद घालायला दुसरं कुणी नको आहे दोघींनाही.</p>
+      </div>
+      <div class="bond-card reveal">
+        <h4>💛 एकच प्रेम</h4>
+        <p>प्रत्येक मतभेदाखाली असं एक प्रेम आहे जे इतकं खोल आहे की त्याला सहमतीची गरज नाही. एक नातं जे वाकतं, पण तुटत नाही.</p>
+      </div>
+      <div class="bond-card reveal">
+        <h4>🌸 सुंदर गोंधळ</h4>
+        <p>त्या दोघी हे सिद्ध करतात की प्रेम सोपं नसलं तरी सखोल असू शकतं. दोन वेगळ्या माणसं, एक घर — आणि सगळं जुळतं.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ MEMORIES SLIDESHOW ══ -->
+<section class="memories">
+  <div class="section-inner" style="max-width:700px;">
+    <span class="section-label reveal">💜 आठवणी</span>
+    <h2 class="section-title reveal"><span style="color:var(--lavender)">आपल्या</span> आठवणींचा खजिना</h2>
+    <p class="section-body reveal" style="margin-bottom:2rem;color:#7c3aed;">
+      प्रत्येक क्षण एक सुंदर आठवण आहे — नंदिनी आणि आईच्या प्रेमाची गोष्ट.
+    </p>
+
+    <div class="slideshow-wrap reveal">
+      <button class="slide-arrow prev" onclick="changeSlide(-1)">‹</button>
+      <button class="slide-arrow next" onclick="changeSlide(1)">›</button>
+
+      <div class="slides-track" id="slidesTrack">
+
+        <div class="slide">
+          <span class="slide-emoji">🌅</span>
+          <span class="slide-year">पहिल्या दिवसापासून</span>
+          <h3 class="slide-title">आईचा पहिला स्पर्श</h3>
+          <p class="slide-body">जेव्हा नंदिनी या जगात आली, तेव्हा आईने तिला जे प्रेम दिलं ते शब्दांत मांडणं अशक्य आहे. तो पहिला क्षण — दोन हृदयं एकत्र आलेले.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-emoji">🎒</span>
+          <span class="slide-year">शाळेचे दिवस</span>
+          <h3 class="slide-title">पहिला शाळेचा दिवस</h3>
+          <p class="slide-body">नंदिनी रडत होती, आईने हात घट्ट धरला — आणि सांगितलं "मी इथेच आहे." त्या हाताची ऊब आजही जाणवते.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-emoji">🌿</span>
+          <span class="slide-year">एकत्र प्रवास</span>
+          <h3 class="slide-title">आईसोबत सहल</h3>
+          <p class="slide-body">त्या सहलीत वाटेत खूप भांडण झालं — कुठे जायचं, काय खायचं, कोणता रस्ता — पण त्या आठवणी आजही हसवतात.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-emoji">🌙</span>
+          <span class="slide-year">कठीण रात्री</span>
+          <h3 class="slide-title">आई नेहमी होती</h3>
+          <p class="slide-body">जेव्हा जेव्हा अंधार वाटला, आई दिवा घेऊन आली. परीक्षेच्या रात्री, दुःखाच्या रात्री — ती नेहमीच जागी होती.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-emoji">🌸</span>
+          <span class="slide-year">आजचा दिवस</span>
+          <h3 class="slide-title">आईचा वाढदिवस</h3>
+          <p class="slide-body">आज नंदिनी फक्त एकच गोष्ट सांगायला इथे आली आहे — आई, तू माझ्या आयुष्यातील सर्वात मोठी भेट आहेस. 💜</p>
+        </div>
+
+      </div><!-- /slides-track -->
+
+      <div class="slide-dots">
+        <button class="dot active" onclick="goToSlide(0)"></button>
+        <button class="dot" onclick="goToSlide(1)"></button>
+        <button class="dot" onclick="goToSlide(2)"></button>
+        <button class="dot" onclick="goToSlide(3)"></button>
+        <button class="dot" onclick="goToSlide(4)"></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ GALLERY ══ -->
+<section class="gallery">
+  <div class="section-inner" style="max-width:920px;">
+    <span class="section-label reveal">📸 एकत्रचे क्षण</span>
+    <h2 class="section-title reveal"><span style="color:var(--sky)">आठवणींचा</span> खजिना</h2>
+    <p class="section-body reveal" style="color:#0369a1;margin-bottom:.5rem;">
+      फोटो जोडायला <code style="background:rgba(255,255,255,.6);padding:.15em .5em;border-radius:6px;font-size:.85em;">images/</code> फोल्डर तयार करा आणि photo1.jpg ते photo5.jpg नावाने फोटो ठेवा.
+    </p>
+    <div class="gallery-grid">
+      <div class="photo-frame reveal">
+        <img src="photo1.jpeg" alt="नंदिनी आणि आई" />
+        <div class="photo-placeholder"><span class="photo-placeholder-icon">🌸</span><p>नंदिनी आणि आई</p><small>photo1.jpeg</small></div>
+      </div>
+      <div class="photo-frame reveal">
+        <img src="photo2.jpeg" alt="एक गोड क्षण" />
+        <div class="photo-placeholder"><span class="photo-placeholder-icon">💙</span><p>एक गोड क्षण</p><small>photo2.jpeg</small></div>
+      </div>
+      <div class="photo-frame reveal">
+        <img src="photo3.jpeg" alt="नेहमी सोबत" />
+        <div class="photo-placeholder"><span class="photo-placeholder-icon">💜</span><p>नेहमी सोबत</p><small>photo3.jpeg</small></div>
+      </div>
+      <div class="photo-frame reveal">
+        <img src="photo4.jpeg" alt="त्या दोघी" />
+        <div class="photo-placeholder"><span class="photo-placeholder-icon">💚</span><p>त्या दोघी</p><small>photo4.jpeg</small></div>
+      </div>
+      <div class="photo-frame reveal">
+        <img src="photo5.jpeg" alt="प्रत्येक चौकटीत प्रेम" />
+        <div class="photo-placeholder"><span class="photo-placeholder-icon">🌷</span><p>प्रत्येक चौकटीत प्रेम</p><small>photo5.jpeg</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ LETTER ══ -->
+<section class="letter">
+  <div class="section-inner">
+    <span class="section-label reveal">💌 नंदिनीकडून</span>
+    <h2 class="section-title reveal" style="text-align:center;"><span style="color:var(--lavender)">आईसाठी</span> एक पत्र</h2>
+    <div class="letter-paper reveal">
+      <p class="salutation">प्रिय आई, 🌸</p>
+      <p>मी नेहमी सांगत नाही — आणि खरं तर आपण बऱ्याच वेळा इतक्या वादात असतो की काही सांगायला वेळच नसतो. पण आज वेगळं आहे. आज मला तुला सांगायचं आहे.</p>
+      <p>तू मला एक गोष्ट दिलीस जी मला मोठं होताना माहीतच नव्हती की मला हवी आहे — प्रेम नेहमी एकसारखं दिसत नाही, पण ते खरं असतं. आपण वेगळ्या आहोत, आई. आपले विचार वेगळे, दृष्टिकोन वेगळे — तरीही तू माझ्या बाजूने आहेस यावर मला कधीच शंका नाही.</p>
+      <p>मी तुला रोज वर्गात जाताना पाहिलं आहे — स्वतःचे सगळं देताना, त्या मुलांसाठी जे तुझे स्वतःचे नाहीत — आणि मला नेहमीच आश्चर्य वाटतं की तू किती काळजी घेतेस. हीच तू आहेस — कुणी न सांगताही पूर्णपणे हजर राहणारी.</p>
+      <p>तूच ती आहेस जिला मी आधी फोन करतो. तूच सर्वात जास्त आठवतेस. तुझं मत मला नको असल्यासारखं दाखवतो — पण खरं तर इतर कुणापेक्षाही जास्त हवं असतं.</p>
+      <p>तुझ्या वाढदिवसाला माझ्याकडे मोठे शब्द नाहीत. फक्त हे: तू माझ्या आयुष्यातील सर्वात आवडती वादविवादाची साथीदार आहेस — आणि आपल्यातलं काहीही मला बदलायचं नाही.</p>
+      <p>माझी आई असल्याबद्दल आभारी आहे. वाढदिवसाच्या खूप खूप शुभेच्छा. मी तुझ्यावर जितकं सांगतो त्यापेक्षा कितीतरी जास्त प्रेम करतो.</p>
+      <p class="sign-off">
+        तुझीच,<br>
+        <strong style="font-style:normal;font-size:1.4rem;color:var(--ink);">नंदिनी</strong> 💜🌸
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <p class="footer-title">वाढदिवसाच्या शुभेच्छा, आई 🌸</p>
+  <div class="hearts">🌸 💜 💛 🩵 🌿</div>
+  <p>नंदिनीने प्रेमाने बनवलेलं</p>
+  <p style="margin-top:.6rem;font-size:.78rem;opacity:.35;">
+    "प्रत्येक गोष्टीत वेगळ्या — पण प्रत्येक क्षणात एकत्र."
+  </p>
+</footer>
+
+<script>
+/* ══ PETALS ══ */
+const canvas = document.getElementById('petals-canvas');
+const ctx = canvas.getContext('2d');
+let W, H, petals = [];
+const COLORS = ['#ffb3c6','#c084fc','#7dd3fc','#6ee7b7','#fde68a','#fdba74','#f9a8d4','#a5f3fc'];
+function resize(){ W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+function makePetal(){
+  return { x:Math.random()*W, y:-20, r:4+Math.random()*6,
+    vx:(Math.random()-.5)*.8, vy:.5+Math.random()*.9,
+    angle:Math.random()*Math.PI*2, spin:(Math.random()-.5)*.05,
+    color:COLORS[Math.floor(Math.random()*COLORS.length)],
+    alpha:.6+Math.random()*.4 };
+}
+function drawPetal(p){
+  ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.angle);
+  ctx.globalAlpha=p.alpha; ctx.fillStyle=p.color;
+  ctx.beginPath(); ctx.ellipse(0,0,p.r,p.r*1.7,0,0,Math.PI*2);
+  ctx.fill(); ctx.restore();
+}
+function tick(){
+  ctx.clearRect(0,0,W,H);
+  if(petals.length<45&&Math.random()<.07) petals.push(makePetal());
+  petals=petals.filter(p=>p.y<H+30);
+  petals.forEach(p=>{ p.x+=p.vx; p.y+=p.vy; p.angle+=p.spin; drawPetal(p); });
+  requestAnimationFrame(tick);
+}
+window.addEventListener('resize',resize); resize(); tick();
+
+/* ══ MUSIC TOGGLE ══ */
+const music   = document.getElementById('bg-music');
+const musicBtn= document.getElementById('music-btn');
+const musicIcon=document.getElementById('music-icon');
+let playing = false;
+musicBtn.addEventListener('click', ()=>{
+  if(playing){ music.pause(); musicIcon.textContent='🎵'; }
+  else { music.play().catch(()=>{}); musicIcon.textContent='🔇'; }
+  playing = !playing;
+});
+
+/* ══ CONFETTI ══ */
+const CONF_COLORS=['#ff85a1','#c084fc','#38bdf8','#34d399','#fbbf24','#fb923c','#f9a8d4','#a5f3fc'];
+function launchConfetti(){
+  for(let i=0;i<120;i++){
+    const el=document.createElement('div');
+    el.className='confetti-piece';
+    el.style.left = Math.random()*100+'vw';
+    el.style.top  = '-10px';
+    el.style.background = CONF_COLORS[Math.floor(Math.random()*CONF_COLORS.length)];
+    el.style.width  = (8+Math.random()*8)+'px';
+    el.style.height = (8+Math.random()*8)+'px';
+    el.style.borderRadius = Math.random()>.5 ? '50%' : '2px';
+    el.style.animationDuration = (2+Math.random()*2)+'s';
+    el.style.animationDelay   = (Math.random()*1)+'s';
+    document.body.appendChild(el);
+    el.addEventListener('animationend',()=>el.remove());
+  }
+}
+
+/* ══ SLIDESHOW ══ */
+let currentSlide = 0;
+const total = 5;
+function goToSlide(n){
+  currentSlide = n;
+  document.getElementById('slidesTrack').style.transform = `translateX(-${n*100}%)`;
+  document.querySelectorAll('.dot').forEach((d,i)=> d.classList.toggle('active', i===n));
+}
+function changeSlide(dir){
+  goToSlide((currentSlide+dir+total)%total);
+}
+/* auto-advance every 4s */
+setInterval(()=>changeSlide(1), 4000);
+
+/* ══ SCROLL REVEAL ══ */
+const io = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } });
+},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+/* ══ PHOTO LOAD ══ */
+document.querySelectorAll('.photo-frame img').forEach(img=>{
+  img.addEventListener('load',()=>{ img.style.display='block'; if(img.nextElementSibling) img.nextElementSibling.style.display='none'; });
+  img.addEventListener('error',()=>{ img.style.display='none'; });
+});
+</script>
+</body>
+</html>
